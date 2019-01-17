@@ -21,12 +21,12 @@ export default new Router({
     },
     {
       path: '/CreatePoll',
-      name: 'view poll',
+      name: 'create-poll',
       component: () => import('./views/CreatePoll.vue'),
     },
     {
       path: '/ViewPoll/:id',
-      name: 'view poll',
+      name: 'view-poll',
       component: () => import('./views/ViewPoll.vue'),
       props: true,
     },

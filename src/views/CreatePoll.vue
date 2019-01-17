@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'create poll',
+  name: 'create-poll',
 };
 </script>
