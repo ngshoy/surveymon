@@ -24,20 +24,20 @@
 </template>
 
 <script>
-  export default {
-    name: 'create-poll',
-    data: () => ({
-      poll: {
-        pollTopic: '',
-        pollOptions: [''],
-      },
-    }),
-    methods: {
-      addPollOption() {
-        this.poll.pollOptions.push('');
-      },
+export default {
+  name: 'create-poll',
+  data: () => ({
+    poll: {
+      pollTopic: '',
+      pollOptions: [''],
     },
-  };
+  }),
+  methods: {
+    addPollOption() {
+      this.poll.pollOptions.push('');
+    },
+  },
+};
 </script>
 
 <style scoped>
