@@ -24,7 +24,7 @@
     <br>
     ---------------------------------
 
-    <header>{{respMsg}}</header>
+    <header v-html="respMsg"></header>
   </div>
 </template>
 
@@ -47,7 +47,8 @@ export default {
     createNewPoll() {
       axios.put('http://localhost:3000/CreatePoll', { ...this.poll })
         .then((res) => {
-          this.respMsg = `Congratulations! Your poll is created successfully! Share your link to get voting: http://localhost:8080/#/ViewPoll/${res.data._id}`;
+          this.respMsg = `Congratulations! Your poll is created successfully! Share your link to get voting: 
+          <a href="http://localhost:8080/#/ViewPoll/${res.data._id}">http://localhost:8080/#/ViewPoll/${res.data._id}</a>`;
         })
         .catch((err) => {
           console.error(err);
