@@ -1,30 +1,44 @@
 <template>
-  <div>
-    <header>Create Your Personalized Poll</header>
-    <br>
-    <label for="topic">What is your topic?</label>
-    <div>
-      <input type="text" id="topic" name="topic" v-model="poll.topic">
+  <div class="md-layout">
+    <div class="md-layout-item">
+      <md-card>
+        <md-card-header>
+          <div class="md-title">Create Your Personalized Poll</div>
+        </md-card-header>
+        <md-card-content>
+          <md-field>
+            <label>What is your topic?</label>
+            <md-input type="text" v-model="poll.topic"></md-input>
+          </md-field>
+          <label for="options">What are the options?</label>
+          <ul name="options">
+            <li v-for="(option, index) in poll.options" v-bind:key="index">
+              <md-field md-inline>
+                <label>Input Option</label>
+                <md-input type="text" v-model="poll.options[index]"></md-input>
+              </md-field>
+            </li>
+          </ul>
+        </md-card-content>
+        <md-card-actions>
+          <md-button class="md-accent" v-on:click="addPollOption">Add another option</md-button>
+        </md-card-actions>
+      </md-card>
     </div>
-    <br>
-    <label for="options">What are the options?</label>
-    <ul name="options">
-      <li v-for="(option, index) in poll.options" v-bind:key="index">
-        <input type="text" v-model="poll.options[index]">
-      </li>
-    </ul>
-    <button v-on:click="addPollOption">add another option</button>
-    <br>
-    ---------------------------------
-
-    <header>Preview Your Poll</header>
-    <p>{{poll.topic}}</p>
-    <p>{{poll.options}}</p>
-    <button v-on:click="createNewPoll">Create your poll</button>
-    <br>
-    ---------------------------------
-
-    <header v-html="respMsg"></header>
+    <div class="md-layout-item">
+      <md-card>
+        <md-card-header>
+          <div class="md-title">Preview Your Poll</div>
+        </md-card-header>
+        <md-card-content>
+          <p>{{poll.topic}}</p>
+          <p>{{poll.options}}</p>
+        </md-card-content>
+        <md-card-actions>
+          <md-button class="md-primary" v-on:click="createNewPoll">Create your poll</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
   </div>
 </template>
 
@@ -60,7 +74,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   ul {
     padding: 0;
     margin: 0;
@@ -73,6 +87,11 @@ export default {
 
   #topic {
     width: 200px;
+  }
+
+  .md-card {
+    width: 460px;
+    margin: 10px;
   }
 
 </style>
