@@ -1,24 +1,24 @@
 import Vue from 'vue';
-import {
-  MdButton, MdCard, MdRadio, MdMenu, MdField, MdBottomBar, MdList, MdIcon, MdSubheader,
-  MdDialog,
-} from 'vue-material/dist/components';
-import 'vue-material/dist/vue-material.min.css';
+import Vuetify from 'vuetify';
+import colors from 'vuetify/es5/util/colors';
 // import 'vue-material/dist/theme/default-dark.css';
 import App from './App.vue';
 import router from './router';
 import './registerServiceWorker';
 
-Vue.use(MdButton);
-Vue.use(MdCard);
-Vue.use(MdRadio);
-Vue.use(MdMenu);
-Vue.use(MdField);
-Vue.use(MdBottomBar);
-Vue.use(MdList);
-Vue.use(MdIcon);
-Vue.use(MdSubheader);
-Vue.use(MdDialog);
+Vue.use(Vuetify, {
+  iconfont: 'mdi',
+  theme: {
+    primary: colors.deepPurple.lighten1,
+    secondary: colors.red.darken1,
+    tertiary: '#ffffff',
+    accent: colors.blue.accent2,
+    error: '#FF5252',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FFC107',
+  },
+});
 
 Vue.config.productionTip = false;
 

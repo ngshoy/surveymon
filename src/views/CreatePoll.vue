@@ -1,5 +1,42 @@
 <template>
-  <div class="md-layout">
+  <v-container grid-list-md>
+    <v-layout row wrap>
+      <v-flex md6>
+        <v-card color="primary">
+          <v-card-title primary-title>
+            <div class="headline">
+              CREATE YOUR POLL
+            </div>
+          </v-card-title>
+          <v-card-text>
+            <v-text-field label="What is your topic?" color="tertiary" v-model="poll.topic" />
+            <label for="options">What are the options?</label>
+            <ul name="options">
+              <li v-for="(option, index) in poll.options" :key="index">
+                <v-text-field label="Input option" color="tertiary"
+                  v-model="poll.options[index].name" />
+              </li>
+            </ul>
+          </v-card-text>
+          <v-card-actions>
+            <v-layout justify-end>
+              <v-btn flat @click="addPollOption">Add another option</v-btn>
+            </v-layout>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+      <v-flex md6>
+        <v-card color="secondary">
+          <v-card-title primary-title>
+            <div class="headline">
+              PREVIEW YOUR POLL
+            </div>
+          </v-card-title>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+  <!-- <div class="md-layout">
     <div class="md-layout-item">
       <md-card>
         <md-card-header>
@@ -56,7 +93,7 @@
         </md-dialog-actions>
       </md-dialog>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -67,7 +104,9 @@ export default {
   data: () => ({
     poll: {
       topic: '',
-      options: [{ name: '' }],
+      options: [{
+        name: '',
+      }],
     },
     respMsg: '',
     respLink: '',
@@ -75,7 +114,9 @@ export default {
   }),
   methods: {
     addPollOption() {
-      this.poll.options.push({ name: '' });
+      this.poll.options.push({
+        name: '',
+      });
     },
     removePollOption(index) {
       this.poll.options.splice(index, 1);
@@ -83,7 +124,9 @@ export default {
     copyToClipboard() {
       const el = document.createElement('textarea');
       el.value = this.respLink;
-      el.style = { visibility: 'hidden' };
+      el.style = {
+        visibility: 'hidden',
+      };
       document.body.appendChild(el);
       el.select();
       document.execCommand('copy');
@@ -92,7 +135,9 @@ export default {
     createNewPoll() {
       this.respLink = '';
       this.respMsg = '';
-      axios.put('http://localhost:3000/CreatePoll', { ...this.poll })
+      axios.put('http://localhost:3000/CreatePoll', {
+        ...this.poll,
+      })
         .then((res) => {
           this.respLink = `http://localhost:8080/#/ViewPoll/${res.data._id}`;
           this.respMsg = `Congratulations! Your poll is created successfully! Share your link to get voting: 

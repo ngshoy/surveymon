@@ -1,40 +1,32 @@
 <template>
-  <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/CreatePoll">Create Poll</router-link> |
-      <router-link to="/ViewPoll/temp">View Poll</router-link>
-    </div> -->
+  <v-app dark>
     <div id="main">
-      <router-view/>
+      <router-view />
     </div>
-  </div>
+  </v-app>
 </template>
 
 <style lang="scss">
-@import "~vue-material/dist/theme/engine";
+  @import '~vuetify/dist/vuetify.min.css';
 
-@include md-register-theme("default", (
-  primary: md-get-palette-color(lightblue, A200),
-  accent: md-get-palette-color(red, A200),
-));
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: auto;
+    text-align: center
+  }
 
-@import "~vue-material/dist/theme/all";
+  #nav {
+    padding: 30px;
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  max-width: 960px;
-  margin: auto;
-  text-align: center
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    &.router-link-exact-active {
-      color: #9e9d42;
+    a {
+      font-weight: bold;
+
+      &.router-link-exact-active {
+        color: #9e9d42;
+      }
     }
   }
-}
+
 </style>
