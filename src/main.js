@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import {
-  MdButton, MdCard, MdRadio, MdMenu, MdField, MdBottomBar, MdList, MdContent,
+  MdButton, MdCard, MdRadio, MdMenu, MdField, MdBottomBar, MdList, MdIcon, MdSubheader,
+  MdDialog,
 } from 'vue-material/dist/components';
 import 'vue-material/dist/vue-material.min.css';
 // import 'vue-material/dist/theme/default-dark.css';
@@ -15,7 +16,9 @@ Vue.use(MdMenu);
 Vue.use(MdField);
 Vue.use(MdBottomBar);
 Vue.use(MdList);
-Vue.use(MdContent);
+Vue.use(MdIcon);
+Vue.use(MdSubheader);
+Vue.use(MdDialog);
 
 Vue.config.productionTip = false;
 
