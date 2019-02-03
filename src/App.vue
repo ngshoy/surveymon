@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/CreatePoll">Create Poll</router-link> |
       <router-link to="/ViewPoll/temp">View Poll</router-link>
-    </div>
+    </div> -->
     <div id="main">
       <router-view/>
     </div>
