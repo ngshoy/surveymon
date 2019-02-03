@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-md>
+  <v-container grid-list-lg>
     <v-layout row wrap>
       <v-flex md6>
         <v-card color="primary">
@@ -26,7 +26,7 @@
         </v-card>
       </v-flex>
       <v-flex md6>
-        <v-card color="secondary">
+        <v-card color="accent">
           <v-card-title primary-title>
             <div class="headline">
               PREVIEW YOUR POLL
@@ -53,21 +53,18 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-dialog v-model="showDialog">
+      <v-card :color="respLink !== '' ? 'success' : 'error'">
+        <v-card-title v-html="respMsg" />
+        <v-card-actions>
+          <v-layout justify-end>
+            <v-btn @click="showDialog = !showDialog">Close</v-btn>
+            <v-btn v-if="respLink !== ''" @click="copyToClipboard">Copy link</v-btn>
+          </v-layout>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
-  <!-- <div class="md-layout">
-    <div class="md-layout-item">
-
-      <md-dialog :md-active.sync="showDialog">
-        <md-dialog-title v-html="respMsg"></md-dialog-title>
-        <md-dialog-actions>
-          <md-button class="md-accent" @click="showDialog = !showDialog">Close</md-button>
-          <md-button class="md-primary" v-if="this.respLink !== ''" @click="copyToClipboard">
-            Copy link
-            </md-button>
-        </md-dialog-actions>
-      </md-dialog>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -115,7 +112,7 @@ export default {
         .then((res) => {
           this.respLink = `http://localhost:8080/#/ViewPoll/${res.data._id}`;
           this.respMsg = `Congratulations! Your poll is created successfully! Share your link to get voting: 
-          <a href="${this.respLink}" target="_blank" no-referrer>${this.respLink}</a>`;
+            <a href="${this.respLink}" target="_blank" no-referrer>${this.respLink}</a>`;
           this.showDialog = true;
         })
         .catch((err) => {

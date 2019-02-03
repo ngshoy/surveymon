@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import colors from 'vuetify/es5/util/colors';
-// import 'vue-material/dist/theme/default-dark.css';
 import App from './App.vue';
 import router from './router';
 import './registerServiceWorker';
@@ -10,7 +9,7 @@ Vue.use(Vuetify, {
   iconfont: 'mdi',
   theme: {
     primary: colors.deepPurple.lighten1,
-    secondary: colors.red.darken1,
+    secondary: colors.red.darken3,
     tertiary: '#ffffff',
     accent: colors.blue.accent2,
     error: '#FF5252',
