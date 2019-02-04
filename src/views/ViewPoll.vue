@@ -55,7 +55,15 @@ export default {
         });
     },
     upvote() {
-      console.log(`upvoted ${this.selectedOption}`);
+      axios.patch(`http://localhost:3000/vote/${this.id}`, {
+        vote: this.selectedOption,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
   },
 };
