@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import CreatePoll from './views/CreatePoll.vue';
 
 Vue.use(Router);
 
@@ -9,7 +8,7 @@ export default new Router({
     {
       path: '/CreatePoll',
       name: 'create-poll',
-      component: CreatePoll,
+      component: () => import('./views/CreatePoll.vue'),
     },
     {
       path: '/ViewPoll/:id',

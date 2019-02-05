@@ -23,6 +23,17 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-dialog v-model="showDialog">
+      <v-card :color="respStatusText !== '' ? 'success' : 'error'">
+        <v-card-title v-html="respMsg" />
+        <v-card-actions>
+          <v-layout justify-end>
+            <v-btn v-if="respStatusText === ''" @click="showDialog = !showDialog">Close</v-btn>
+            <v-btn v-if="respStatusText !== ''" :href="resultsLink">View results</v-btn>
+          </v-layout>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -37,6 +48,10 @@ export default {
   data: () => ({
     pollData: {},
     selectedOption: '',
+    showDialog: false,
+    respStatusText: '',
+    respMsg: '',
+    resultsLink: '',
   }),
   created() {
     this.fetchData();
@@ -55,13 +70,19 @@ export default {
         });
     },
     upvote() {
+      this.respStatusText = '';
       axios.patch(`http://localhost:3000/vote/${this.id}`, {
         vote: this.selectedOption,
       })
         .then((res) => {
-          console.log(res);
+          this.showDialog = true;
+          this.respStatusText = res.statusText;
+          this.respMsg = 'Congratulations! Your vote has been counted successfully!';
+          this.resultsLink = `/PollResults/${this.id}`;
         })
         .catch((err) => {
+          this.showDialog = true;
+          this.respMsg = 'Oops! Something went wrong and your vote wasn\'t counted...Please try again later.';
           console.error(err);
         });
     },
