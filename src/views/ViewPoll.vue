@@ -29,7 +29,7 @@
         <v-card-actions>
           <v-layout justify-end>
             <v-btn v-if="respStatusText === ''" @click="showDialog = !showDialog">Close</v-btn>
-            <v-btn v-if="respStatusText !== ''" :href="resultsLink">View results</v-btn>
+            <v-btn v-if="respStatusText !== ''" :to="resultsLink">View results</v-btn>
           </v-layout>
         </v-card-actions>
       </v-card>
