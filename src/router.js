@@ -16,5 +16,11 @@ export default new Router({
       component: () => import('./views/ViewPoll.vue'),
       props: true,
     },
+    {
+      path: '/PollResults/:id',
+      name: 'poll-results',
+      component: () => import('./views/PollResults.vue'),
+      props: true,
+    },
   ],
 });
