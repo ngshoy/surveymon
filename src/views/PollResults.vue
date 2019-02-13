@@ -1,17 +1,17 @@
 <template>
   <v-container grid-list-lg>
     <div class="headline" v-if="pollData">{{pollData.topic}}</div>
-    <bar-chart v-if="loaded" :chartData="pollChartData" />
+    <doughnut-chart v-if="loaded" :chartData="pollChartData" />
   </v-container>
 </template>
 
 <script>
 import axios from 'axios';
-import BarChart from '../components/BarChart.vue';
+import DoughnutChart from '../components/DoughnutChart.vue';
 
 export default {
   name: 'poll-results',
-  components: { BarChart },
+  components: { DoughnutChart },
   props: {
     id: String,
   },
@@ -23,7 +23,7 @@ export default {
       datasets: [
         {
           label: 'Vote Results',
-          backgroundColor: '#f87979',
+          backgroundColor: ['#7E57C2', '#C62828', '#448AFF', '#43A047'],
           data: [],
         },
       ],
