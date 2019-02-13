@@ -1,20 +1,22 @@
 <template>
   <v-container grid-list-lg>
-    You're viewing {{pollChartData._id}}
+    <div class="headline" v-if="pollData">{{pollData.topic}}</div>
+    <bar-chart v-if="loaded" :chartData="pollChartData" />
   </v-container>
 </template>
 
 <script>
 import axios from 'axios';
-import { Bar } from 'vue-chartjs';
+import BarChart from '../components/BarChart.vue';
 
 export default {
-  extends: Bar,
   name: 'poll-results',
+  components: { BarChart },
   props: {
     id: String,
   },
   data: () => ({
+    loaded: false,
     pollData: null,
     pollChartData: {
       labels: [],
@@ -26,22 +28,16 @@ export default {
         },
       ],
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-    },
   }),
   created() {
     this.fetchData();
-  },
-  mounted() {
-    this.renderChart(this.pollChartData, this.options);
   },
   watch: {
     $route: 'fetchData',
   },
   methods: {
     fetchData() {
+      this.loaded = false;
       axios.get(`http://localhost:3000/ViewPoll/${this.id}`)
         .then((res) => {
           this.pollData = res.data;
@@ -49,6 +45,7 @@ export default {
             this.pollChartData.labels.push(option.name);
             this.pollChartData.datasets[0].data.push(option.voteCount);
           });
+          this.loaded = true;
         })
         .catch((err) => {
           console.error(err);
