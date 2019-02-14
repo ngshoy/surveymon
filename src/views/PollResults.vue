@@ -24,6 +24,7 @@ export default {
         {
           label: 'Vote Results',
           backgroundColor: ['#7E57C2', '#C62828', '#448AFF', '#43A047'],
+          hoverBackgroundColor: ['#673AB7', '#B71C1C', '#2979FF', '#388E3C'],
           data: [],
         },
       ],
