@@ -39,7 +39,7 @@ export default {
   methods: {
     fetchData() {
       this.loaded = false;
-      axios.get(`http://localhost:3000/ViewPoll/${this.id}`)
+      axios.get(`http://localhost:3000/PollResults/${this.id}`)
         .then((res) => {
           this.pollData = res.data;
           res.data.options.forEach((option) => {
