@@ -4,7 +4,13 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./views/Login.vue'),
+    },
     {
       path: '/CreatePoll',
       name: 'create-poll',
@@ -21,6 +27,10 @@ export default new Router({
       name: 'poll-results',
       component: () => import('./views/PollResults.vue'),
       props: true,
+    },
+    {
+      path: '*',
+      redirect: '/login',
     },
   ],
 });
