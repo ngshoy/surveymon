@@ -9,9 +9,10 @@
             </div>
           </v-card-title>
           <v-card-text>
-            <v-text-field label="user name" type="text" color="tertiary" v-model="login.userName" />
+            <v-text-field label="user name" type="text"
+              color="tertiary" v-model="loginInfo.userName" />
             <v-text-field label="password" type="password"
-            color="tertiary" v-model="login.password" />
+              color="tertiary" v-model="loginInfo.password" />
             <!-- :append-icon="showPassword ? 'visibility_off' : 'visibility'"
             :type="showPassword ? 'text' : 'password'"
             @click:append="showPassword = !showPassword"/> -->
@@ -19,7 +20,7 @@
           <v-card-actions>
             <v-layout justify-end>
               <v-btn flat to="register">Register</v-btn>
-              <v-btn flat>Login</v-btn>
+              <v-btn flat @click="login">Login</v-btn>
             </v-layout>
           </v-card-actions>
         </v-card>
@@ -30,15 +31,31 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'login',
   data: () => ({
-    login: {
+    loginInfo: {
       userName: '',
       password: '',
     },
     // showPassword: false,
+    access_token: '',
   }),
+  methods: {
+    login() {
+      axios.post('http://localhost:3001/login', {
+        ...this.loginInfo,
+      })
+        .then((res) => {
+          this.access_token = res.data.access_token;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
 };
 
 </script>
