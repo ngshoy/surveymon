@@ -2,7 +2,7 @@
   <v-container grid-list-lg>
     <v-layout row wrap align-center justify-center fill-height>
       <v-flex md6>
-        <v-card color="primary">
+        <v-card color="accent">
           <v-card-title primary-title>
             <div class="headline">
               Welcome
