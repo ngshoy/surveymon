@@ -49,7 +49,7 @@ export default {
         ...this.loginInfo,
       })
         .then((res) => {
-          this.access_token = res.data.access_token;
+          this.$store.commit('setAccessToken', res.data.access_token);
         })
         .catch((err) => {
           console.error(err);
