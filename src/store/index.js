@@ -1,18 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import permissions from './modules/permissions';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    access_token: '',
-  },
-  mutations: {
-    setAccessToken(state, accessToken) {
-      state.access_token = accessToken;
-    },
-  },
-  actions: {
-
+  modules: {
+    permissions,
   },
 });
