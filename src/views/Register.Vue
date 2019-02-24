@@ -12,26 +12,33 @@
             <v-layout row wrap>
               <v-flex xs12 sm6>
                 <v-text-field label="first name" type="text"
-                color="tertiary" v-model="registerInfo.firstName" />
+                color="tertiary" v-model="registerInfo.firstName"
+                :rules="[rules.required]" />
               </v-flex>
               <v-flex xs12 sm6>
                 <v-text-field label="last name" type="text"
-                color="tertiary" v-model="registerInfo.lastName" />
+                color="tertiary" v-model="registerInfo.lastName"
+                :rules="[rules.required]" />
               </v-flex>
               <v-flex sm12>
                 <v-text-field label="email address" type="email"
-                  color="tertiary" v-model="registerInfo.email" />
+                  color="tertiary" v-model="registerInfo.email"
+                  :rules="[rules.required]" />
               </v-flex>
               <v-flex sm12>
                 <v-text-field label="user name" type="text"
-                  color="tertiary" v-model="registerInfo.userName" />
+                  color="tertiary" v-model="registerInfo.userName"
+                  :rules="[rules.required]" />
               </v-flex>
               <v-flex sm12>
                 <v-text-field label="password" type="password"
-                  color="tertiary" v-model="registerInfo.password" />
+                  color="tertiary" v-model="registerInfo.password"
+                  :rules="[rules.required]" />
               </v-flex>
               <v-flex sm12>
                 <v-text-field label="confirm password" type="password"
+                  :rules="[rules.required,
+                          () => registerInfo.password === registerInfo.confirmPassword || 'password does not match']"
                   color="tertiary" v-model="registerInfo.confirmPassword" />
               </v-flex>
             </v-layout>
@@ -59,7 +66,9 @@ export default {
       password: '',
       confirmPassword: '',
     },
-    rules: {},
+    rules: {
+      required: value => !!value || 'Required.',
+    },
   }),
 };
 </script>
