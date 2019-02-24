@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from './store';
 
 Vue.use(Router);
 
@@ -20,6 +21,12 @@ export default new Router({
       path: '/CreatePoll',
       name: 'create-poll',
       component: () => import('./views/CreatePoll.vue'),
+      beforeEnter: (to, from, next) => {
+        console.log(to);
+        if (!store.state.access_token) {
+          next('/login');
+        }
+      },
     },
     {
       path: '/ViewPoll/:id',
@@ -32,10 +39,6 @@ export default new Router({
       name: 'poll-results',
       component: () => import('./views/PollResults.vue'),
       props: true,
-    },
-    {
-      path: '*',
-      redirect: '/login',
     },
   ],
 });

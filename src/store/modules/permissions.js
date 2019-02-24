@@ -1,6 +1,12 @@
 
 const state = {
-  access_token: '',
+  access_token: undefined,
+};
+
+const getters = {
+  getAccessToken(state) {
+    return state.access_token;
+  },
 };
 
 const mutations = {
@@ -11,6 +17,7 @@ const mutations = {
 
 const permissions = {
   state,
+  getters,
   mutations,
 };
 
