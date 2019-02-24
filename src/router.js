@@ -6,13 +6,13 @@ import Login from './views/Login.vue';
 Vue.use(Router);
 
 const accessGuard = (to, from, next) => {
-  store.commit('updatePrevPath', to.fullPath);
-  if (!store.state.access_token) {
+  if (!store.state.permissions.access_token) {
     next('/login');
   }
+  next();
 };
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -45,3 +45,12 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.fullPath !== '/login') {
+    store.commit('updatePrevPath', to.fullPath);
+  }
+  next();
+});
+
+export default router;
