@@ -51,7 +51,7 @@ export default {
         .then((res) => {
           this.$store.commit('setAccessToken', res.data.access_token);
           localStorage.setItem('access_token', res.data.access_token);
-          const nextPath = this.$store.state.prevPath || '/CreatePoll';
+          const nextPath = this.$store.state.nav.prevPath || '/CreatePoll';
           this.$router.push(nextPath);
         })
         .catch((err) => {

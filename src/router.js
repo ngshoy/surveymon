@@ -36,12 +36,14 @@ const router = new Router({
       name: 'view-poll',
       component: () => import('./views/ViewPoll.vue'),
       props: true,
+      beforeEnter: accessGuard,
     },
     {
       path: '/PollResults/:id',
       name: 'poll-results',
       component: () => import('./views/PollResults.vue'),
       props: true,
+      beforeEnter: accessGuard,
     },
   ],
 });
