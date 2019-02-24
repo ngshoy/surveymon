@@ -50,6 +50,8 @@ export default {
       })
         .then((res) => {
           this.$store.commit('setAccessToken', res.data.access_token);
+          const nextPath = this.$store.state.prevPath || '/CreatePoll';
+          this.$router.go(nextPath);
         })
         .catch((err) => {
           console.error(err);

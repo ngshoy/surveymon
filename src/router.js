@@ -1,8 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from './store';
+import Login from './views/Login.vue';
 
 Vue.use(Router);
+
+const accessGuard = (to, from, next) => {
+  store.commit('updatePrevPath', to.fullPath);
+  if (!store.state.access_token) {
+    next('/login');
+  }
+};
 
 export default new Router({
   mode: 'history',
@@ -10,7 +18,7 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: () => import('./views/Login.vue'),
+      component: Login,
     },
     {
       path: '/register',
@@ -21,12 +29,7 @@ export default new Router({
       path: '/CreatePoll',
       name: 'create-poll',
       component: () => import('./views/CreatePoll.vue'),
-      beforeEnter: (to, from, next) => {
-        console.log(to);
-        if (!store.state.access_token) {
-          next('/login');
-        }
-      },
+      beforeEnter: accessGuard,
     },
     {
       path: '/ViewPoll/:id',
