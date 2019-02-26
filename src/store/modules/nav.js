@@ -1,3 +1,6 @@
+/* eslint no-shadow: ["error", { "allow": ["state"] }] */
+/* eslint no-param-reassign: ["error", { "ignorePropertyModificationsFor": ["state"]}] */
+
 const state = {
   prevPath: undefined,
 };
