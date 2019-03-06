@@ -7,6 +7,7 @@
 
 <script>
 import axios from 'axios';
+import store from '../store';
 import DoughnutChart from '../components/DoughnutChart.vue';
 
 export default {
@@ -17,6 +18,7 @@ export default {
   },
   data: () => ({
     loaded: false,
+    access_token: '',
     pollData: null,
     pollChartData: {
       labels: [],
@@ -31,6 +33,7 @@ export default {
     },
   }),
   created() {
+    this.access_token = store.state.permissions.access_token;
     this.fetchData();
   },
   watch: {
@@ -39,7 +42,9 @@ export default {
   methods: {
     fetchData() {
       this.loaded = false;
-      axios.get(`http://localhost:3000/PollResults/${this.id}`)
+      axios.get(`http://localhost:3000/PollResults/${this.id}`, {
+        headers: { access_token: this.access_token },
+      })
         .then((res) => {
           this.pollData = res.data;
           res.data.options.forEach((option) => {

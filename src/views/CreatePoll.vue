@@ -55,7 +55,13 @@
     </v-layout>
     <v-dialog v-model="showDialog">
       <v-card :color="respLink !== '' ? 'success' : 'error'">
-        <v-card-title v-html="respMsg" />
+        <v-card-title v-if="respLink !== ''">
+          Congratulations! Your poll is created successfully! Share your link to get voting:
+          <router-link :to="{name: 'view-poll', params: { id: respId}}">{{respLink}}</router-link>
+        </v-card-title>
+        <v-card-title v-if="respLink === ''">
+          Oops! Something went wrong and we couldn\'t create your poll... Please try again in another time.
+        </v-card-title>
         <v-card-actions>
           <v-layout justify-end>
             <v-btn @click="showDialog = !showDialog">Close</v-btn>
@@ -69,6 +75,7 @@
 
 <script>
 import axios from 'axios';
+import store from '../store';
 
 export default {
   name: 'create-poll',
@@ -79,10 +86,14 @@ export default {
         name: '',
       }],
     },
-    respMsg: '',
+    respId: '',
     respLink: '',
     showDialog: false,
+    access_token: '',
   }),
+  created() {
+    this.access_token = store.state.permissions.access_token;
+  },
   methods: {
     addPollOption() {
       this.poll.options.push({
@@ -108,16 +119,16 @@ export default {
       this.respMsg = '';
       axios.put('http://localhost:3000/CreatePoll', {
         ...this.poll,
+      }, {
+        headers: { access_token: this.access_token },
       })
         .then((res) => {
-          this.respLink = `http://localhost:8080/#/ViewPoll/${res.data._id}`;
-          this.respMsg = `Congratulations! Your poll is created successfully! Share your link to get voting: 
-            <a href="${this.respLink}" target="_blank" no-referrer>${this.respLink}</a>`;
+          this.respLink = `http://localhost:8080/ViewPoll/${res.data._id}`;
+          this.respId = res.data._id;
           this.showDialog = true;
         })
         .catch((err) => {
           console.error(err);
-          this.respMsg = 'Oops! Something went wrong and we couldn\'t create your poll... Please try again in another time.';
           this.showDialog = true;
         });
     },

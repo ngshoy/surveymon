@@ -39,6 +39,7 @@
 
 <script>
 import axios from 'axios';
+import store from '../store';
 
 export default {
   name: 'view-poll',
@@ -52,8 +53,10 @@ export default {
     respStatusText: '',
     respMsg: '',
     resultsLink: '',
+    access_token: '',
   }),
   created() {
+    this.access_token = store.state.permissions.access_token;
     this.fetchData();
   },
   watch: {
@@ -61,7 +64,9 @@ export default {
   },
   methods: {
     fetchData() {
-      axios.get(`http://localhost:3000/ViewPoll/${this.id}`)
+      axios.get(`http://localhost:3000/ViewPoll/${this.id}`, {
+        headers: { access_token: this.access_token },
+      })
         .then((res) => {
           this.pollData = res.data;
         })
@@ -73,6 +78,8 @@ export default {
       this.respStatusText = '';
       axios.patch(`http://localhost:3000/vote/${this.id}`, {
         vote: this.selectedOption,
+      }, {
+        headers: { access_token: this.access_token },
       })
         .then((res) => {
           this.showDialog = true;
