@@ -65,7 +65,7 @@ export default {
   methods: {
     fetchData() {
       axios.get(`http://localhost:3000/ViewPoll/${this.id}`, {
-        headers: { access_token: this.access_token },
+        headers: { Authorization: `Bearer ${this.access_token}` },
       })
         .then((res) => {
           this.pollData = res.data;
@@ -79,7 +79,7 @@ export default {
       axios.patch(`http://localhost:3000/vote/${this.id}`, {
         vote: this.selectedOption,
       }, {
-        headers: { access_token: this.access_token },
+        headers: { Authorization: `Bearer ${this.access_token}` },
       })
         .then((res) => {
           this.showDialog = true;

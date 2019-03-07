@@ -43,7 +43,7 @@ export default {
     fetchData() {
       this.loaded = false;
       axios.get(`http://localhost:3000/PollResults/${this.id}`, {
-        headers: { access_token: this.access_token },
+        headers: { Authorization: `Bearer ${this.access_token}` },
       })
         .then((res) => {
           this.pollData = res.data;

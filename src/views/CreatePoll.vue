@@ -120,7 +120,7 @@ export default {
       axios.put('http://localhost:3000/CreatePoll', {
         ...this.poll,
       }, {
-        headers: { access_token: this.access_token },
+        headers: { Authorization: `Bearer ${this.access_token}` },
       })
         .then((res) => {
           this.respLink = `http://localhost:8080/ViewPoll/${res.data._id}`;
