@@ -1,8 +1,8 @@
 <template>
   <v-app dark>
-    <div id="main">
+    <v-layout row wrap fill-height id="main">
       <router-view />
-    </div>
+    </v-layout>
   </v-app>
 </template>
 
